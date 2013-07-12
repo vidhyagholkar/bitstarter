@@ -23,7 +23,6 @@ References:
 
 var fs = require('fs');
 var program = require('commander');
-var sys = require('util');
 var cheerio = require('cheerio');
 var rest = require('restler');
 // var HTMLFILE_DEFAULT = "index.html";
@@ -70,17 +69,17 @@ if(require.main == module) {
         .parse(process.argv);
 
 if (program.file){
- $ = cheerioHtmlFile(program.file)
-var checkJson = checkHtmlFile($, program.checks)
-var outJson = JSON.stringify(checkJson, null, 4);
-console.log(outJson);
+    $ = cheerioHtmlFile(program.file)
+    var checkJson = checkHtmlFile($, program.checks)
+    var outJson = JSON.stringify(checkJson, null, 4);
+    console.log(outJson);
 }
 if (program.url){
-rest.get(program.url).on('complete',function(result){
-$=cheerio.load(result);
-var checkJson = checkHtmlFile($, program.checks)
-var outJson = JSON.stringify(checkJson, null, 4);
-console.log(outJson)
+    rest.get(program.url).on('complete',function(result){
+	$=cheerio.load(result);
+	var checkJson = checkHtmlFile($, program.checks)
+	var outJson = JSON.stringify(checkJson, null, 4);
+	console.log(outJson)
 })
 
 
